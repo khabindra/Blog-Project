@@ -1,7 +1,7 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from .models import Post
 # Create your views here.
 
@@ -22,8 +22,12 @@ def posts(request):
    pass
 
 
-def post_detail(request):
+class DetailPostView(DetailView):
+    template_name = 'my_blog/post_detail.html'
+    model = Post
+    
     pass
+
 
 def Contactview(request):
     return render(request,'my_blog/contact.html') 
