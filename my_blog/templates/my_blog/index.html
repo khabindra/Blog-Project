@@ -17,15 +17,23 @@ My Blog
     <div class="content">
         <section id="latest-posts">
             <h2>Latest Blogs</h2>
+            {% for post in posts %}
             <ul>
-                post 1
+                <li>
+                    <article class="post">
+                        <a href="">
+                            <img src="{{post.image.url}}" alt="{{post.title}}">
+                            <div class="post_content">
+                                <h3>{{post.title}}</h3>
+                                <p>{{post.token}}</p>
+                            </div>
+                        </a>
+                    </article>
+
+                </li>
+
             </ul>
-            <ul>
-                post 2
-            </ul>
-            <ul>
-                post 3
-            </ul>
+            {% endfor %}
         </section>
     </div><!-- .content -->
 
