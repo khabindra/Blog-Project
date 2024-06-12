@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'my_blog/index.css' %}" />
+<link rel="stylesheet" href="{% static 'my_blog/overflow.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="wrap">
+    <div class="content">
+        <div class="content-section">
+            <form action="" method="post">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Join Today</legend>
+                    {{form|crispy}}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">Already Have Account? <a href=""></a></small>
+            </div>
+        </div>
+    </div><!-- .content -->
+
+    <div class="sidebar">
+        <section id="welcome">
+            <header>
+                <img class="box" src="{% static 'my_blog/img/profile.png' %}" />
+                <h2>Khabin Tamang</h2>
+            </header>
+            <p>Hello Friends welcome To My Blog</p>
+        </section>
+    </div><!-- .sidebar -->
+    <div class="clear"></div>
+</div><!-- .wrap -->
+
+
+
+{% endblock %}

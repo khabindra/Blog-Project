@@ -6,4 +6,5 @@ urlpatterns = [
     path('posts', AllPostView.as_view(), name='posts_page'),
     path('posts/<slug:slug>/', DetailPostView.as_view(), name='detail_posts_page'),
     path('contact/',Contactview,name='contact_page'),
+    path('signup/',SignUpView.as_view(),name='sign_up')
 ]

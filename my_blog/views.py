@@ -1,8 +1,10 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,CreateView
 from .models import Post
+from django.urls import reverse_lazy
+from .forms import UserRegisterForm
 
 # Create your views here.
 
@@ -35,3 +37,8 @@ class DetailPostView(DetailView):
 
 def Contactview(request):
     return render(request,'my_blog/contact.html') 
+
+class SignUpView(CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('login')
+    template_name = 'my_blog/register.html'
