@@ -1,7 +1,43 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
 {% block title %}
-personal project
+My Blog
 {% endblock %}
-{% block content_in_body %}
-<h3>This page is index.html page.</h3>
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'my_blog/index.css' %}" />
+<link rel="stylesheet" href="{% static 'my_blog/post.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+<div class="wrap">
+    <div class="content">
+        <section id="latest-posts">
+            <h2>Latest Blogs</h2>
+            <ul>
+                post 1
+            </ul>
+            <ul>
+                post 2
+            </ul>
+            <ul>
+                post 3
+            </ul>
+        </section>
+    </div><!-- .content -->
+
+    <div class="sidebar">
+        <section id="welcome">
+            <header>
+                <img class="box" src="{% static 'my_blog/img/profile.png' %}" />
+                <h2>Khabin Tamang</h2>
+            </header>
+            <p>Hello Friends welcome To My Blog</p>
+        </section>
+    </div><!-- .sidebar -->
+    <div class="clear"></div>
+</div><!-- .wrap -->
 {% endblock %}
