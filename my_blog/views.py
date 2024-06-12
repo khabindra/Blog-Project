@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-def landing_page(requests):
-    pass
-def posts(requests):
-    pass
+def landing_page(request):
+    return render(request,'my_blog/index.html')
+def posts(request):
+   pass
+
 
 def post_detail(request):
     pass
