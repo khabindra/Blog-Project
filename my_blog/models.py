@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     title = models.CharField(max_length=150)
     token = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='',null=True)
+    image = models.ImageField(upload_to='posts',null=True)
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
