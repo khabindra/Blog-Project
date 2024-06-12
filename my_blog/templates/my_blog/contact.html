@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'my_blog/index.css' %}" />
+<link rel="stylesheet" href="{% static 'my_blog/contact.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <div class="content">
+        <section id="latest-posts">
+            <h2 class="contact-h1">Contact Us</h2>
+            <br><br>
+            <div class="text-box">
+                <a href="https://www.facebook.com/khabindra.tamang.7/" class="fa fa-facebook"></a>
+                <p class="contact-text">
+                <h2> www.facebook.com/khabindra.tamang.7/</h2>
+                </p>
+            </div>
+
+            <div class="text-box">
+                <a href="https://www.youtube.com/@PathofSugata" class="fa fa-youtube"></a>
+                <p class="contact-text">
+                <h2> www.youtube.com/@PathofSugata</h2>
+                </p>
+            </div>
+            <div class="text-box">
+                <a href="https://www.github.com/khabindra/" class="fa fa-github"></a>
+                <p class="contact-text">
+                <h2> www.github.com/khabindra/</h2>
+                </p>
+            </div>
+        </section>
+    </div><!-- .content -->
+
+    <div class="sidebar">
+        <section id="welcome">
+            <header>
+                <img src="{% static 'my_blog/img/profile.png' %}" />
+                <h2>Follow US</h2>
+            </header>
+            <p>Contact me If help needed ! </p>
+        </section>
+    </div><!-- .sidebar -->
+    <div class="clear"></div>
+</div><!-- .wrap -->
+
+{% endblock %}

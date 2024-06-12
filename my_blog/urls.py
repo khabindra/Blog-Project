@@ -5,4 +5,5 @@ urlpatterns = [
     path('', landing_page, name='landing_page'),
     path('posts', posts, name='posts_page'),
     path('posts/<slug:slug>/', post_detail, name='detail_posts_page'),
+    path('contact/',Contactview,name='contact_page'),
 ]

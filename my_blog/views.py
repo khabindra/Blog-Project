@@ -9,3 +9,6 @@ def posts(request):
 
 def post_detail(request):
     pass
+
+def Contactview(request):
+    return render(request,'my_blog/contact.html') 
