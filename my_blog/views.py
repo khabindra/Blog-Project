@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from .models import Post
+
 # Create your views here.
 
 
@@ -18,15 +19,18 @@ class LandingPageView(ListView):
         return data
     
 
-def posts(request):
-   pass
+class AllPostView(ListView):
+    template_name = 'my_blog/all_posts.html'
+    model = Post
+    ordering = ['-date']
+    context_object_name = 'all_posts'
+
+
 
 
 class DetailPostView(DetailView):
     template_name = 'my_blog/post_detail.html'
     model = Post
-    
-    pass
 
 
 def Contactview(request):
