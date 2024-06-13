@@ -47,7 +47,8 @@ class DetailPostView(LoginRequiredMixin,View):
     def get(self, request, slug):
         post = Post.objects.get(slug=slug)
         context = {'post': post,
-                   'comment_form':CommentForm()
+                   'comment_form':CommentForm(),
+                   'comments':post.comments.all().order_by('-id')
                    }
         return render(request, self.template_name, context)
     
@@ -60,11 +61,12 @@ class DetailPostView(LoginRequiredMixin,View):
             comment.post = post 
             comment.save()
 
-            return HttpResponseRedirect(reverse('detail_post_page',args=[slug]))
+            return HttpResponseRedirect(reverse('detail_posts_page',args=[post.slug]))
         
         context = {
             'post':post,
-            'comment_form':CommentForm()
+            'comment_form':CommentForm(),
+            'comments':post.comments.all().order_by('-id')
         }
         return render(request,'my_blog/post_detail.html',context)
 

@@ -56,5 +56,21 @@ My Blog
             {{post.content |linebreaks }}
         </p>
     </div>
+    <section id="comments">
+        <h4> User Comments</h4>
+        <ul>
+            {% for comment in comments %}
+            <div>
+                <li>
+                    <h5>{{comment.user_name}}</h5>
+                    <p>{{comment.text | linebreaks}}</p>
+                </li>
+            </div>
+
+            {% endfor %}
+
+        </ul>
+
+    </section>
 </div><!-- .wrap -->
 {% endblock %}

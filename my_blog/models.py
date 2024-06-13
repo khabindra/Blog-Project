@@ -12,9 +12,15 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Comment(models.Model):
     user_name = models.CharField(max_length=50)
     user_email = models.EmailField()
     text = models.TextField(max_length=200)
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
+
+    def __str__(self) -> str:
+        return self.user_name

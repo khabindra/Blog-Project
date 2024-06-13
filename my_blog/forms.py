@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Comment
@@ -20,4 +21,7 @@ class CommentForm(forms.ModelForm):
             "user_name": "Your Name",
             "user_email": "Your Email",
             "text": "Your Comment"
+        }
+        widgets = {
+            'text': Textarea(attrs={'rows': 2})  # Use 'attrs' instead of 'attr'
         }
