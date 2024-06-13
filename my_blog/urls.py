@@ -1,5 +1,5 @@
 from django.urls import path
-from django.contrib.auth import views as auth_view
+from django.contrib.auth import views
 from . import views
 urlpatterns =[
     path("",views.LandingPageView.as_view(),name="landing_page"),
@@ -11,5 +11,7 @@ urlpatterns =[
     # path("logout/",auth_view.LogoutView.as_view(template_name="my_blog/logout.html"),name="logout"),
     path("login/",views.custom_login,name="login"),  # Use custom login view
     path("logout/",views.custom_logout,name="logout"),  # Use custom logout view
-    path('createpost',views.PostCreateView.as_view(),name='post_create_page')
+    path('createpost',views.PostCreateView.as_view(),name='post_create_page'),
+    path('posts/<slug:slug>/update',views.PostUpdateView.as_view(),name='update_post_page'),
+    
 ]

@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView
 from .models import Post
 from django.urls import reverse_lazy
 from .forms import UserRegisterForm
@@ -84,4 +84,27 @@ class PostCreateView(CreateView):
         form.instance.slug = slugify(form.cleaned_data['title']) 
         return super().form_valid(form)
     success_url = reverse_lazy('posts_page')
+    
+
+
+
+
+from django.contrib.auth.mixins import UserPassesTestMixin 
+
+class PostUpdateView(UpdateView,UserPassesTestMixin):
+    template_name = 'my_blog/create_post.html'
+    model = Post
+    fields = ['title','token','image','content']
+    success_url = reverse_lazy('posts_page')
+    
+    def form_valid(self, form):
+        form.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+    
     

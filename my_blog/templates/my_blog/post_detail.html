@@ -29,6 +29,11 @@ My Blog
                     {{post.author}}
                 </address>
                 Last updated on <time>{{post.date| date:'d M Y' }}</time>
+                <br>
+                {% if user.id == post.author.id %}
+                <a class="btn btn-outline-secondary" href="{% url 'update_post_page' post.slug %}">Update</a>
+                <a href=""></a>
+                {% endif %}
             </article>
         </section>
     </div><!-- .sidebar -->
