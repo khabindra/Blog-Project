@@ -11,9 +11,9 @@ body {
 }
 
 .header {
-    border-radius: 10px;
+    border-radius: 12px;
     width: 1200px;
-    height: 80px;
+    height: 140px;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 75px;
@@ -21,7 +21,7 @@ body {
 }
 
 .footer {
-    border-radius: 10px;
+    border-radius: 12px;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 75px;

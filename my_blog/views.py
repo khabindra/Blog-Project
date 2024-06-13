@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
+from django.utils.text import slugify
 # Create your views here.
 
 
@@ -28,7 +30,7 @@ class LandingPageView(ListView):
         return data
     
 
-class AllPostView(ListView):
+class AllPostView(LoginRequiredMixin,ListView):
     template_name = 'my_blog/all_posts.html'
     model = Post
     ordering = ['-date']
@@ -36,8 +38,7 @@ class AllPostView(ListView):
 
 
 
-
-class DetailPostView(DetailView):
+class DetailPostView(LoginRequiredMixin,DetailView):
     template_name = 'my_blog/post_detail.html'
     model = Post
 
@@ -74,8 +75,8 @@ def custom_logout(request):
     return HttpResponseRedirect(reverse('landing_page'))
 
 
-from django.utils.text import slugify
-class PostCreateView(CreateView):
+
+class PostCreateView(LoginRequiredMixin,CreateView):
     model = Post
     template_name = 'my_blog/create_post.html'
     fields = ['title','token','image','content']
@@ -88,10 +89,7 @@ class PostCreateView(CreateView):
 
 
 
-
-from django.contrib.auth.mixins import UserPassesTestMixin 
-
-class PostUpdateView(UpdateView,UserPassesTestMixin):
+class PostUpdateView(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
     template_name = 'my_blog/create_post.html'
     model = Post
     fields = ['title','token','image','content']
@@ -108,7 +106,9 @@ class PostUpdateView(UpdateView,UserPassesTestMixin):
         return False
     
 
-class PostDeleteView(UserPassesTestMixin, DeleteView):
+
+
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('posts_page')
     
