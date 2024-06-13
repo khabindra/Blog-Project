@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView,CreateView,UpdateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import Post
 from django.urls import reverse_lazy
 from .forms import UserRegisterForm
@@ -107,4 +107,14 @@ class PostUpdateView(UpdateView,UserPassesTestMixin):
             return True
         return False
     
+
+class PostDeleteView(UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('posts_page')
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
     

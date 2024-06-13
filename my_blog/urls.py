@@ -13,5 +13,6 @@ urlpatterns =[
     path("logout/",views.custom_logout,name="logout"),  # Use custom logout view
     path('createpost',views.PostCreateView.as_view(),name='post_create_page'),
     path('posts/<slug:slug>/update',views.PostUpdateView.as_view(),name='update_post_page'),
-    
+     path("posts/<slug:slug>/delete", views.PostDeleteView.as_view(), name="delete_post_page"),
+
 ]

@@ -32,7 +32,7 @@ My Blog
                 <br>
                 {% if user.id == post.author.id %}
                 <a class="btn btn-outline-secondary" href="{% url 'update_post_page' post.slug %}">Update</a>
-                <a href=""></a>
+                <a class="btn btn-outline-danger" href="{% url 'delete_post_page' post.slug %}">Delete</a>
                 {% endif %}
             </article>
         </section>
