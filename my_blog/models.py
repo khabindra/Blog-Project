@@ -11,3 +11,10 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
+
+class Comment(models.Model):
+    user_name = models.CharField(max_length=50)
+    user_email = models.EmailField()
+    text = models.TextField(max_length=200)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')

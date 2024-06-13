@@ -2,11 +2,11 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import ListView,CreateView,UpdateView,DeleteView
+from django.views import View
 from .models import Post
-from django.urls import reverse_lazy
-from .forms import UserRegisterForm
-from django.urls import reverse
+from django.urls import reverse_lazy,reverse
+from .forms import UserRegisterForm,CommentForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -38,9 +38,35 @@ class AllPostView(LoginRequiredMixin,ListView):
 
 
 
-class DetailPostView(LoginRequiredMixin,DetailView):
-    template_name = 'my_blog/post_detail.html'
-    model = Post
+# class DetailPostView(LoginRequiredMixin,DetailView):
+#     template_name = 'my_blog/post_detail.html'
+#     model = Post
+
+class DetailPostView(LoginRequiredMixin,View):
+    template_name = 'my_blog/post_detail.html'  
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {'post': post,
+                   'comment_form':CommentForm()
+                   }
+        return render(request, self.template_name, context)
+    
+    def post(self,request,slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post 
+            comment.save()
+
+            return HttpResponseRedirect(reverse('detail_post_page',args=[slug]))
+        
+        context = {
+            'post':post,
+            'comment_form':CommentForm()
+        }
+        return render(request,'my_blog/post_detail.html',context)
 
 
 def Contactview(request):

@@ -12,11 +12,24 @@ My Blog
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 {% endblock %}
 
-
 {% block content %}
 <div class="wrap">
     <div class="content">
-
+        <section id="comment-form">
+            <h2> Have Your Say</h2>
+            <p> Plz tell us what you think {{user.username }}</p>
+            <form action="{% url 'detail_posts_page' post.slug %}" method="POST">
+                {% csrf_token %}
+                {% for form_field in comment_form %}
+                <div class="form-control {% if form_field.errors %} invalid {% endif %}">
+                    {{ form_field.label_tag}}
+                    {{form_field}}
+                    {{form_field.errors}}
+                </div>
+                {% endfor %}
+                <button>Save Comment</button>
+            </form>
+        </section>
     </div><!-- .content -->
 
     <div class="sidebar">
