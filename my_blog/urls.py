@@ -11,4 +11,5 @@ urlpatterns =[
     # path("logout/",auth_view.LogoutView.as_view(template_name="my_blog/logout.html"),name="logout"),
     path("login/",views.custom_login,name="login"),  # Use custom login view
     path("logout/",views.custom_logout,name="logout"),  # Use custom logout view
+    path('createpost',views.PostCreateView.as_view(),name='post_create_page')
 ]

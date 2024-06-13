@@ -1,5 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
+from django.forms import BaseModelForm
 from django.shortcuts import render,redirect
 from django.views.generic import ListView,DetailView,CreateView
 from .models import Post
@@ -8,7 +9,7 @@ from .forms import UserRegisterForm
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
@@ -71,3 +72,16 @@ def custom_login(request):
 def custom_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('landing_page'))
+
+
+from django.utils.text import slugify
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'my_blog/create_post.html'
+    fields = ['title','token','image','content']
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.slug = slugify(form.cleaned_data['title']) 
+        return super().form_valid(form)
+    success_url = reverse_lazy('posts_page')
+    
